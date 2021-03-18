@@ -13,10 +13,12 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 /* Plugins */
 
 import nuxt_plugin_plugin_7f8a9959 from 'nuxt_plugin_plugin_7f8a9959' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_nuxtleaflet_440213f6 from 'nuxt_plugin_nuxtleaflet_440213f6' // Source: ./nuxt-leaflet.js (mode: 'client')
 import nuxt_plugin_workbox_a9d6116a from 'nuxt_plugin_workbox_a9d6116a' // Source: ./workbox.js (mode: 'client')
 import nuxt_plugin_metaplugin_e0d87944 from 'nuxt_plugin_metaplugin_e0d87944' // Source: ./pwa/meta.plugin.js (mode: 'all')
 import nuxt_plugin_iconplugin_d7892e5c from 'nuxt_plugin_iconplugin_d7892e5c' // Source: ./pwa/icon.plugin.js (mode: 'all')
 import nuxt_plugin_buefy_cd277d80 from 'nuxt_plugin_buefy_cd277d80' // Source: ./buefy.js (mode: 'all')
+import nuxt_plugin_easynominatim_9323f63a from 'nuxt_plugin_easynominatim_9323f63a' // Source: ../plugins/easy-nominatim.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -180,6 +182,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_7f8a9959(app.context, inject)
   }
 
+  if (process.client && typeof nuxt_plugin_nuxtleaflet_440213f6 === 'function') {
+    await nuxt_plugin_nuxtleaflet_440213f6(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_workbox_a9d6116a === 'function') {
     await nuxt_plugin_workbox_a9d6116a(app.context, inject)
   }
@@ -194,6 +200,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_buefy_cd277d80 === 'function') {
     await nuxt_plugin_buefy_cd277d80(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_easynominatim_9323f63a === 'function') {
+    await nuxt_plugin_easynominatim_9323f63a(app.context, inject)
   }
 
   // Lock enablePreview in context

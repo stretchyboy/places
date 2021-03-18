@@ -12,5 +12,12 @@
     "component": "/workspace/places/pages/index.vue",
     "chunkName": "pages/index",
     "_name": "_14398bcf"
+  },
+  {
+    "name": "place",
+    "path": "/:place",
+    "component": "/workspace/places/pages/_place.vue",
+    "chunkName": "pages/_place",
+    "_name": "_5b236ddb"
   }
 ]
