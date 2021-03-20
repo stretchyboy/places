@@ -1,38 +1,58 @@
 <template>
-  <section class="section">
-    <h1>{{ this.place }}</h1>
+ <div class="main-content columns">
+        
+  <section class="section column is-9">
     <div class="is-mobile">
       <div id="map-wrap" style="height: 100vh">
-    <client-only>
-        <l-map :zoom=13 :center="[55.9464418,8.1277591]">
-            <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-            <l-marker :lat-lng="[55.9464418,8.1277591]"></l-marker>
-        </l-map>
-    </client-only>
-    </div>
+        <client-only>
+            <l-map :bounds="bounds" >
+                <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
+                <l-geo-json :geojson="placeGeo"></l-geo-json>
+            </l-map>
+        </client-only>
+      </div>
     </div>
   </section>
+  <aside class="column is-3">
+      <!--<h1>{{ place }}</h1>-->
+      <wikipedia :name="place" />
+  </aside>
+ </div>
 </template>
 
 <script>
 import Card from '~/components/Card'
+import Wikipedia from '~/components/Wikipedia.vue'
 
 export default {
   name: 'Place',
 
    async asyncData({ params, app, $http }) {
-    const places = await app.$getPlaceData(params.place)
-    console.log(places)
-    /*const geohash = await app.$getGeoHash(location, 6)
-    const stops = await $http.$get('https://kkh91b05a8.execute-api.eu-west-2.amazonaws.com/staging/stops/'+geohash)
-    return { stops }*/
-
     const place = params.place
-    return {place}
+    
+    const places = await app.$getPlaceData(params.place)
+    var placeData = false
+    var  placeGeo = false
+    var center = [0,0]
+    var bounds = [[0,0],[10,10]]
+    if(place && places.length){
+        placeData = places[0]
+        //console.log(placeData)
+        center = [placeData.lat, placeData.lon]
+        bounds = [
+            [placeData.boundingbox[0],placeData.boundingbox[2]],
+            [placeData.boundingbox[1],placeData.boundingbox[3]]
+        ]
+        placeGeo = await app.$getOsmGeoJson(placeData.osm_id)
+        //console.log("placeGeo", placeGeo)
+    }
+    
+    return {place, placeData, placeGeo, center,bounds}
   },
 
   components: {
-    Card
+    Card,
+    Wikipedia
   }
 }
 </script>

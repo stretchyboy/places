@@ -4,5 +4,8 @@
   },
   "Logo": {
     "description": "Auto imported from components/Logo.vue"
+  },
+  "Wikipedia": {
+    "description": "Auto imported from components/Wikipedia.vue"
   }
 }

@@ -1,4 +1,6 @@
 import Nominatim from 'nominatim-geocoder'
+import osmGeoJson from 'osm-geojson'
+
 
 export default ({ app }, inject) => {
     // Inject $hello(msg) in Vue, context and store.
@@ -8,5 +10,11 @@ export default ({ app }, inject) => {
         return geocoder.search( { q: place})
     }
 
+    const getOsmGeoJson = async function(osm_id){
+        //console.log("getOsmGeoJson", osm_id)
+        return osmGeoJson.get(osm_id)
+    }
+
   inject('getPlaceData', getPlaceData);
+  inject('getOsmGeoJson', getOsmGeoJson);
 }

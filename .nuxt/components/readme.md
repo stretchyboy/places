@@ -8,3 +8,4 @@ You can directly use them in pages and other components without the need to impo
 
 - `<Card>` | `<card>` (components/Card.vue)
 - `<Logo>` | `<logo>` (components/Logo.vue)
+- `<Wikipedia>` | `<wikipedia>` (components/Wikipedia.vue)

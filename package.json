@@ -11,12 +11,14 @@
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.8.3",
-    "cross-fetch": "^3.1.1",
-    "easy-nominatim": "^1.0.4",
+    "fs": "^0.0.1-security",
+    "net": "^1.0.2",
     "nominatim-geocoder": "^0.1.4",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4",
-    "nuxt-leaflet": "^0.0.25"
-  },
-  "devDependencies": {}
+    "nuxt-leaflet": "^0.0.25",
+    "osm-geojson": "^0.8.4",
+    "request": "^2.88.2",
+    "tls": "^0.0.1"
+  }
 }
